@@ -228,7 +228,12 @@ def modify_localities_data(pack_parameters):
                     locality["population"] = str_to_int(locality["type"])
                     locality["type"] = locality_population
                 except Exception:
-                    locality["type"] = locality_population
+                    if len(locality_type) > 2:
+                        locality["type"] = locality_type
+                        locality["population"] = locality_population
+                    else:
+                        locality["type"] = locality_population
+                        locality["population"] = locality_type
     for region_additionally in regions_additionally:
         for li_item_text in region_additionally["li_items_text"]:
             if "Код субъекта России" in li_item_text:
